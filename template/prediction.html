@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}prediction{% endblock title %}
+
+{% block body %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/pre.css' %}">
+<header>
+ 
+    
+  
+    <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <div class="card shadow-lg">
+              <div class="card-body p-4">
+                <h3 class="text-center mb-4">Insurance Premium Prediction</h3>
+
+                <h5 class="text-center">
+                  <b>
+                      {% if output %}
+                          <h5>Insurance Premium : {{ output|floatformat:2 }}</h5>
+                      {% endif %}
+                  </b>
+              </h5>
+                <form  method="POST"  action="/prediction">
+                    {% csrf_token %}
+                  <!-- Age Input -->
+                   
+                  <div class="form-floating mb-3">
+                    <label for="floating_age">Age</label>
+                    <input type="number" class="form-control" id="age" name='age' placeholder="Age" required>
+                    
+                  </div>
+      
+                  <!-- Sex Dropdown -->
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="sex" name='sex' required>
+                      <option value="" disabled selected>Choose Sex</option>
+                      <option value="0">Female</option>
+                      <option value="1">Male</option>
+                    </select>
+                    <label for="floating_sex">Sex</label>
+                  </div>
+      
+                  <!-- BMI Input -->
+                  <div class="form-floating mb-3">
+                    <label for="floating_bmi">BMI</label>
+                    <input type="text" class="form-control" id="bmi" name='bmi' placeholder="BMI" required>
+                   
+                  </div>
+      
+                  <!-- No. of Children Input -->
+                  <div class="form-floating mb-3">
+                    <label for="floating_children">No. of Children</label>
+                    <input type="number" class="form-control" id="children"  name="children"placeholder="No. of Children" required>
+                    
+                  </div>
+      
+                  <!-- Smoker Dropdown -->
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="smoker" name="smoker" required>
+                      <option value="" disabled selected>Are you a smoker?</option>
+                      <option value="0">No</option>
+                      <option value="1">Yes</option>
+                    </select>
+                    <label for="floating_smoker">Smoker</label>
+                  </div>
+      
+                  <!-- Region Dropdown -->
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="region" name="region" required>
+                      <option value="" disabled selected>Select Region</option>
+                      <option value="1">Southwest</option>
+                      <option value="2">Southeast</option>
+                      <option value="3">Northwest</option>
+                      <option value="4">Northeast</option>
+                    </select>
+                    <label for="floating_region">Region</label>
+                  </div>
+      
+                  <!-- Submit Button -->
+                  <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Predict</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+{% endblock body %}
